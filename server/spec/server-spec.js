@@ -10,8 +10,8 @@ describe('Persistent Node Chat Server', function() {
 
   beforeEach(function(done) {
     dbConnection = mysql.createConnection({
-      user: 'root',
-      password: '',
+      user: 'student',
+      password: 'student',
       database: 'chat'
     });
     dbConnection.connect();
@@ -57,7 +57,7 @@ describe('Persistent Node Chat Server', function() {
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
+          expect(results[0].messages).to.equal('In mercy\'s name, three days is all I need.');
 
           done();
         });

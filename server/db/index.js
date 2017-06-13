@@ -4,21 +4,21 @@ var mysql = require('mysql');
 // You will need to connect with the user "root", no password,
 // and to the database "chat".
 
-exports.connetMySql = (sql, callback) => {
+exports.connectMySql = (sql, callback) => {
   let connection = mysql.createConnection({
-    host: 'http://127.0.0.1:3000',
-    user: 'root',
-    password: '',
+    host: 'localhost',
+    user: 'student',
+    password: 'student',
     database: 'chat'
   });
 
   connection.connect();
 
   connection.query(sql, (err, result) => {
-    console.log(sql);
-    console.log(result);
-    if (err) { console.log(err); }
-    callback(null, result);
+    console.log('queryString: ', sql);
+    if (err) { console.log('****** FAILED ******', err); }
+    console.log('mySQL result: ', result);
+    if (callback) { callback({results: result}); }
   });
 
   connection.end();

@@ -12,28 +12,24 @@ let header = {
 module.exports = {
   messages: {
     get: function (req, res) {
-      let pathname = url.parse(req.url).pathname;
-      // console.log(pathname);
-      if (pathname === '/classes/message') {
-        models.messages.get(res, 200, header);
-      } else {
-        models.messages.get(res, 404, header);
-      }
+      models.messages.get(result => {
+        res.json(result); 
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      models.messages.post(req, res, 201, header);
+      console.log('messages body: ', req.body);
+      console.log('typeof body: ', typeof req.body);
+      models.messages.post(req.body);
+      res.send();
     } // a function which handles posting a message to the database
   },
 
   users: {
     // Ditto as above
     get: function (req, res) {
-      let pathname = url.parse(req.url).pathname;
-      if (pathname === '/classes/users') {
-        models.messages.get(res, 200, header);
-      } else {
-        models.messages.get(res, 404, header);
-      }
+      models.users.get( result => {
+        res.json(result);
+      });
     },
     post: function (req, res) {
       models.messages.post(req, res, 201, header);
