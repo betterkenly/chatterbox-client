@@ -10,8 +10,8 @@ module.exports = {
       });
     }, // a function which produces all the messages
     post: function (body) {
-      let message = body.text;
-      let queryString = `insert into messages (text) values (${JSON.stringify(message)});`;
+      let queryString = `insert into messages (text, roomname) values 
+      (${JSON.stringify(body.text)}, ${JSON.stringify(body.roomname)});`;
       db.connectMySql(queryString, null);
     } // a function which can be used to insert a message into the database
   },
@@ -25,8 +25,10 @@ module.exports = {
       });
     },
     post: function (body) {
-      let username = body.username; 
-      let queryString = ''
+
+      let queryString = `insert into users (name) values ${JSON.stringify(body.username)}`;
+      db.connectMySql(queryString, null);
+
     }
   }
 };
